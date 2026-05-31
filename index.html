@@ -3,353 +3,354 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ترتيلا - لوحة أبطال القرآن 🌟</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;900&family=Reem+Kufi:wght@700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>منصة ترتيلاً لإدارة الحلقات والاشتراكات</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
-        :root { 
-            --purple-main: #93679A; /* نفس لون كلمة ترتيلا في اللوجو تماماً */
-            --purple-light: #F3EEF5; 
-            --gold: #D4AF37; 
-            --text-dark: #4A354F;
-            --mint: #E2F0CB;
-            --baby-blue: #E8F4F8;
-            --pastel-pink: #FFF0F5;
+        :root {
+            --pink-bg: #fff0f5; /* روز ناعم */
+            --blue-accent: #e0f7fa; /* بيبي بلو للعدادات */
+            --pink-main: #ff69b4;
+            --pistachio: #e8f5e9; /* فستقي مريح للرسائل */
+            --white-card: #ffffff;
+            --text-color: #4a4a4a;
         }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: var(--pink-bg); font-family: 'Cairo', sans-serif; color: var(--text-color); padding: 30px 15px; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
+        .container { background: var(--white-card); max-width: 650px; width: 100%; border-radius: 25px; box-shadow: 0 10px 30px rgba(255, 105, 180, 0.1); padding: 30px; border: 2px solid #ffb6c1; }
         
-        /* خلفية مبهجة ومتحركة انسيابياً بألوان الباستيل المريحة للأطفال */
-        body {
-            background: linear-gradient(125deg, var(--pastel-pink), var(--purple-light), var(--baby-blue), #E6E6FA);
-            background-size: 400% 400%;
-            animation: gradientAnimation 12s ease infinite;
-            font-family: 'Cairo', sans-serif;
-            padding: 20px;
-            direction: rtl;
-            text-align: center;
-            color: var(--text-dark);
-            margin: 0;
-            min-height: 100vh;
-        }
-
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* حاوية العنوان المحدثة برمجياً لتطابق رموز وزخارف اللوجو الأصلي */
-        .header-container {
-            max-width: 440px;
-            margin: 0 auto 20px auto;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 25px 20px;
-            border-radius: 30px;
-            box-shadow: 0 10px 30px rgba(147, 103, 154, 0.05);
-            border: 2px solid rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(10px);
-            box-sizing: border-box;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* الهلال والنجمة اللامعة في أعلى العنوان */
-        .top-decorations {
-            color: var(--gold);
-            font-size: 1.4rem;
-            margin-bottom: 5px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* تصميم نص "ترتيلا" متطابق مع الخط الكوفي واللون والأبعاد */
-        .main-title {
-            font-family: 'Reem Kufi', sans-serif;
-            font-size: 3.2rem;
-            color: var(--purple-main);
-            margin: 5px 0;
-            padding: 0;
-            line-height: 1.1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-        }
-
-        /* فرع أوراق الشجر الجانبي المستوحى من اللوجو تماماً */
-        .leaf-icon {
-            font-size: 1.8rem;
-            color: var(--purple-main);
-            transform: rotate(-15deg);
-            opacity: 0.85;
-        }
-
-        /* تصميم اسم المعلمة بنفس الخط الكوفي ونفس الرموز المحيطة للتماثل */
-        .sub-title-teacher {
-            font-family: 'Reem Kufi', sans-serif;
-            font-size: 1.4rem;
-            color: var(--purple-main);
-            margin: 15px 0 10px 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .sub-title-online {
-            font-size: 1rem;
-            color: var(--gold);
-            margin: 5px 0 0 0;
-            font-weight: 900;
-            background: rgba(212, 175, 55, 0.1);
-            display: inline-block;
-            padding: 5px 20px;
-            border-radius: 50px;
-            border: 1px dashed rgba(212, 175, 55, 0.3);
-        }
-
-        /* بطاقة عرض الورد اليومي التفاعلية */
-        .card { 
-            background: rgba(255, 255, 255, 0.92); 
-            padding: 30px 25px; 
-            border-radius: 30px; 
-            border: 3px solid var(--purple-light); 
-            max-width: 440px; 
-            margin: 20px auto; 
-            box-shadow: 0 15px 35px rgba(147, 103, 154, 0.08); 
-            box-sizing: border-box;
-            backdrop-filter: blur(5px);
-        }
-
-        h2, h3 { color: var(--purple-main); margin-top: 0; font-weight: 900; }
+        .header { text-align: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 2px dashed #ffb6c1; }
+        .platform-name { color: var(--pink-main); font-size: 34px; font-weight: 700; }
+        .teacher-name { color: #777; font-size: 16px; display: block; margin-top: 5px; font-weight: 600; }
         
-        .wird-box { 
-            background: linear-gradient(135deg, var(--purple-main), #b38cb9); 
-            padding: 20px; 
-            border-radius: 20px; 
-            color: white; 
-            font-weight: bold; 
-            margin: 20px 0; 
-            font-size: 1.35rem; 
-            box-shadow: 0 8px 20px rgba(147, 103, 154, 0.25);
-            border: 2px dashed rgba(255,255,255,0.4);
-            line-height: 1.7;
-        }
+        .tabs-menu { display: flex; gap: 10px; margin-bottom: 25px; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
+        .tab-btn { flex: 1; padding: 12px; border: none; background: #f5f5f5; border-radius: 12px; cursor: pointer; font-family: 'Cairo', sans-serif; font-weight: bold; font-size: 14px; color: #777; transition: all 0.3s; }
+        .tab-btn.active { background: var(--pink-main); color: white; box-shadow: 0 4px 10px rgba(255, 105, 180, 0.2); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
 
-        /* إحصائيات البطل التفاعلية */
-        .hero-stats {
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 20px;
-            background: var(--purple-light);
-            padding: 12px;
-            border-radius: 15px;
-        }
-
-        .stat-item { font-size: 0.95rem; font-weight: bold; color: var(--purple-main); display: flex; align-items: center; gap: 5px; }
-        .stat-item i { color: var(--gold); }
-
-        input { 
-            width: 100%; 
-            padding: 14px; 
-            border-radius: 15px; 
-            border: 2px solid var(--purple-light); 
-            margin-bottom: 15px; 
-            text-align: center; 
-            font-size: 1.1rem; 
-            outline: none;
-            transition: 0.3s;
-            box-sizing: border-box;
-            font-family: 'Cairo', sans-serif;
-        }
-        input:focus { border-color: var(--purple-main); box-shadow: 0 0 10px rgba(147, 103, 154, 0.15); }
-
-        button { 
-            background: linear-gradient(135deg, #D4AF37, #AA7C11); 
-            border: none; 
-            padding: 15px 45px; 
-            border-radius: 50px; 
-            font-weight: bold; 
-            cursor: pointer; 
-            color: white; 
-            font-size: 1.2rem; 
-            box-shadow: 0 5px 15px rgba(170, 124, 17, 0.3);
-            transition: 0.3s;
-            width: 100%;
-            font-family: 'Cairo', sans-serif;
-        }
-        button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(170, 124, 17, 0.5); }
-        button:disabled { background: #ccc; box-shadow: none; cursor: not-allowed; }
-
-        /* لوحة المتصدرين وقائمة الأبطال */
-        .leaderboard { 
-            background: rgba(255, 255, 255, 0.92); 
-            padding: 25px; 
-            border-radius: 30px; 
-            border: 3px solid var(--purple-light); 
-            max-width: 440px; 
-            margin: 20px auto; 
-            box-shadow: 0 15px 35px rgba(147, 103, 154, 0.08);
-            box-sizing: border-box;
-            backdrop-filter: blur(5px);
-        }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--pink-main); }
+        input, select, textarea { width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 15px; background-color: #fafafa; outline: none; transition: all 0.3s; font-family: 'Cairo', sans-serif; }
+        input:focus, select:focus, textarea:focus { border-color: var(--pink-main); background-color: #fff; }
         
-        .student-item { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            padding: 14px 10px; 
-            border-bottom: 1px solid var(--purple-light); 
-            transition: 0.2s;
-        }
-        .student-item:hover { background-color: var(--purple-light); border-radius: 10px; }
-        .rank { font-weight: bold; min-width: 75px; text-align: right; color: var(--purple-main); }
-        .hero-name { flex-grow: 1; text-align: right; margin-right: 10px; font-weight: 600; }
-        .badge-tag { background: var(--mint); color: #4F772D; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; font-weight: bold; white-space: nowrap; }
+        .status-box { display: flex; gap: 15px; }
+        .status-option { flex: 1; text-align: center; }
+        .status-option input { display: none; }
+        .status-option label { background: #f5f5f5; padding: 12px; border-radius: 12px; cursor: pointer; border: 2px solid #e0e0e0; display: block; font-weight: 700; transition: all 0.3s; }
+        .status-option input:checked + label { background: var(--pink-main); color: white; border-color: var(--pink-main); }
+        
+        .eval-card { background: #fffafb; padding: 20px; border-radius: 15px; border: 1px solid #ffb6c1; margin-top: 15px; }
+        .submit-btn { width: 100%; background: var(--pink-main); color: white; border: none; padding: 14px; font-size: 18px; font-weight: bold; border-radius: 12px; cursor: pointer; margin-top: 10px; transition: all 0.3s; box-shadow: 0 4px 12px rgba(255, 105, 180, 0.2); }
+        .submit-btn:hover { background: #ff4500; }
+        
+        .alert { display: none; padding: 15px; border-radius: 12px; text-align: center; margin-top: 20px; font-weight: bold; background: var(--pistachio); color: #2e7d32; border: 1px solid #c8e6c9; }
+        .counter-info { background: var(--blue-accent); padding: 10px; border-radius: 10px; text-align: center; font-size: 14px; margin-top: 8px; color: #006064; font-weight: 600; display: none; }
+        .points-badge { background: #fff3e0; color: #e65100; padding: 2px 8px; border-radius: 6px; font-size: 12px; font-weight: bold; margin-right: 5px; display: inline-block; }
     </style>
 </head>
 <body>
 
-    <div class="header-container">
-        <div class="top-decorations">
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-solid fa-moon"></i>
-            <i class="fa-regular fa-star"></i>
-        </div>
-        <h1 class="main-title">
-            <i class="fa-solid fa-leaf leaf-icon"></i>
-            تَرْتِيلَا
-        </h1>
-        <div class="sub-title-teacher">
-            <i class="fa-solid fa-leaf leaf-icon" style="font-size: 1.1rem;"></i>
-            تحت إشراف المعلمة بسنت أحمد
-        </div>
-        <div class="sub-title-online">حفظ القرآن الكريم أون لاين 🌿</div>
+<div class="container">
+    <div class="header">
+        <h1 class="platform-name">منصة ترتيلاً الإلكترونية</h1>
+        <span class="teacher-name">تحت إشراف المعلمة بسنت أحمد</span>
     </div>
 
-    <div class="card">
-        <h2>ورد اليوم 🌟</h2>
-        <div class="wird-box" id="wirdDisplay">جاري سحب الورد...</div>
-        
-        <div class="hero-stats">
-            <div class="stat-item"><i class="fa-solid fa-fire"></i> الالتزام: <span id="localStreak">0</span> يوم</div>
-            <div class="stat-item"><i class="fa-solid fa-star"></i> نقاطك: <span id="localXP">0</span> XP</div>
-        </div>
-
-        <input type="text" id="studentName" placeholder="اكتب اسمك يا بطل" oninput="loadHeroStats()">
-        <button id="submitBtn" onclick="sendData()">تم الإنجاز ويجمع النقاط ✅</button>
+    <div class="tabs-menu">
+        <button class="tab-btn active" onclick="switchTab('halka-tab')"><i class="fa-solid fa-pen-to-square"></i> رصد الحلقة</button>
+        <button class="tab-btn" onclick="switchTab('students-tab')"><i class="fa-solid fa-user-plus"></i> الطلاب والمواعيد</button>
     </div>
 
-    <div class="leaderboard">
-        <h3>لوحة الأبطال المتصدرين 🏆</h3>
-        <div id="list">تحميل قائمة الأبطال...</div>
+    <div id="halka-tab" class="tab-content active">
+        <form id="tartilaForm">
+            <div class="form-group">
+                <label><i class="fa-regular fa-calendar-days"></i> التاريخ:</label>
+                <input type="date" id="halkaDate" required>
+            </div>
+
+            <div class="form-group">
+                <label><i class="fa-solid fa-user-graduate"></i> اسم الطالب:</label>
+                <select id="studentSelect" required onchange="updateStudentStats()">
+                    <option value="" disabled selected>-- اختر اسم الطالب الحالي --</option>
+                    <option value="محمد ماجد">محمد ماجد</option>
+                    <option value="محمد على">محمد على</option>
+                    <option value="يارا">يارا</option>
+                    <option value="ادم">ادم</option>
+                    <option value="فريده">فريده</option>
+                    <option value="عمر">عمر</option>
+                    <option value="لين">لين</option>
+                    <option value="رقيه">رقيه</option>
+                    <option value="منصور">منصور</option>
+                    <option value="مؤيد">مؤيد</option>
+                    <option value="جومانا">جومانا</option>
+                    <option value="جيدا">جيدا</option>
+                    <option value="أروى">أروى</option>
+                    <option value="أسمى">أسمى</option>
+                    <option value="يوسف">يوسف</option>
+                    <option value="مريم">مريم</option>
+                    <option value="زياد">زياد</option>
+                    <option value="ريان">ريان</option>
+                    <option value="مالك">مالك</option>
+                    <option value="حمزه">حمزه</option>
+                    <option value="حلا ماجد">حلا ماجد</option>
+                    <option value="بسمله">بسمله</option>
+                    <option value="أدم حسين">أدم حسين</option>
+                    <option value="طالب جديد">➕ [إضافة طالب جديد يدوياً]</option>
+                </select>
+                
+                <input type="text" id="customStudentName" placeholder="اكتبي اسم الطالب الجديد هنا..." style="display:none; margin-top:10px; border-color:#ff69b4;">
+                
+                <div id="counterInfo" class="counter-info"></div>
+            </div>
+
+            <div class="form-group">
+                <label><i class="fa-solid fa-circle-info"></i> الحالة:</label>
+                <div class="status-box">
+                    <div class="status-option">
+                        <input type="radio" name="st" id="p" value="حضور" checked onclick="showEval(true)">
+                        <label for="p">حضور ✅</label>
+                    </div>
+                    <div class="status-option">
+                        <input type="radio" name="st" id="a" value="غياب" onclick="showEval(false)">
+                        <label for="a">غياب ❌</label>
+                    </div>
+                </div>
+            </div>
+
+            <div id="evalArea" class="eval-card">
+                <div class="form-group">
+                    <label><i class="fa-solid fa-credit-card"></i> حالة الاشتراك الشهري الحالي:</label>
+                    <select id="subscriptionSelect">
+                        <option value="مدفوع 🟢" selected>مدفوع 🟢</option>
+                        <option value="غير مدفوع 🔴">غير مدفوع 🔴</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa-solid fa-medal"></i> منح نقاط تميز إضافية لحلقة اليوم:</label>
+                    <select id="pointsSelect">
+                        <option value="0">بدون نقاط إضافية</option>
+                        <option value="5">5 نقاط (حفظ ممتاز) ⭐</option>
+                        <option value="10">10 نقاط (أداء استثنائي وتجويد متقن) 🏆</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>📖 مستوى الحفظ اليومي:</label>
+                    <input type="text" id="hifzLevel" placeholder="اكتبي السورة والآيات...">
+                </div>
+
+                <div class="form-group">
+                    <label>🔄 مستوى المراجعة الحالية:</label>
+                    <input type="text" id="moraajaaLevel" placeholder="اكتبي السورة أو الأجزاء...">
+                </div>
+
+                <div class="form-group">
+                    <label>✨ جودة التجويد والأداء:</label>
+                    <input type="text" id="tajweedQuality" placeholder="مثال: تجويد سليم وممتاز">
+                </div>
+
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label>🔍 بيان القصور أو ملاحظات التوجيه الكلي لولي الأمر:</label>
+                    <textarea id="deficiencyNotes" rows="2" placeholder="اكتبي القصور أو التوجيه هنا..."></textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">حفظ وإرسال التقرير الشامل</button>
+        </form>
     </div>
+
+    <div id="students-tab" class="tab-content">
+        <form id="newStudentForm">
+            <div class="form-group">
+                <label><i class="fa-solid fa-id-card"></i> اسم الطفل بالكامل:</label>
+                <input type="text" id="newStudentName" placeholder="مثال: إبراهيم محمد" required>
+            </div>
+            <div class="form-group">
+                <label><i class="fa-solid fa-child"></i> عمر الطفل:</label>
+                <input type="number" id="studentAge" placeholder="مثال: 7 سنوات" required>
+            </div>
+            <div class="form-group">
+                <label><i class="fa-solid fa-clock"></i> الموعد الأسبوعي المحدد له:</label>
+                <input type="text" id="studentSchedule" placeholder="مثال: السبت الساعة 4 عصراً" required>
+            </div>
+            <div class="form-group">
+                <label><i class="fa-solid fa-phone"></i> رقم تواصل ولي الأمر (واتساب):</label>
+                <input type="tel" id="studentPhone" placeholder="مثال: 010XXXXXXXX" required>
+            </div>
+            <div class="form-group">
+                <label><i class="fa-solid fa-rotate"></i> نوع ومسار الحصة المعتمدة الحالية:</label>
+                <select id="classType">
+                    <option value="أساسية منتظمة" selected>حصة أساسية منتظمة بموعدها</option>
+                    <option value="تعويضية عن غياب سابق">حصة تعويضية إضافية (بدل غياب سابق)</option>
+                </select>
+            </div>
+            <button type="submit" class="submit-btn" style="background-color: #20b2aa;">حفظ وإضافة الطالب والموعد للجدول</button>
+        </form>
+    </div>
+
+    <div id="msg" class="alert">تمت العملية وتحديث السجلات بنجاح! ✨</div>
+</div>
 
 <script>
-    // رابط الـ Web App الخاص بكِ والمرتبط بـ Google Sheets لإدارة الأسماء والورد تلقائياً
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyu4LRyi2QQs7J1ysA5CAnWUdEZprwuJECEmSiEgNolM9p_yF7zgA9HFjpzCPVKVvCS/exec';
+    // ضعي رابط الـ Deployment السحري النشط الخاص بكِ هنا
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzIlnXQc8v7b-YOUR-SCRIPT-ID/exec";
 
-    function loadHeroStats() {
-        const name = document.getElementById('studentName').value.trim();
-        if(!name) {
-            document.getElementById('localStreak').innerText = "0";
-            document.getElementById('localXP').innerText = "0";
+    document.getElementById('halkaDate').valueAsDate = new Date();
+
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+
+    function showEval(v) { 
+        document.getElementById('evalArea').style.display = v ? 'block' : 'none'; 
+    }
+
+    // إظهار حقل كتابة الاسم المخصص إذا تم اختيار "طالب جديد"
+    function updateStudentStats() {
+        const select = document.getElementById('studentSelect');
+        const customInput = document.getElementById('customStudentName');
+        const student = select.value;
+        
+        if (student === "طالب جديد") {
+            customInput.style.display = 'block';
+            customInput.setAttribute('required', 'true');
+            document.getElementById('counterInfo').style.display = 'none';
             return;
+        } else {
+            customInput.style.display = 'none';
+            customInput.removeAttribute('required');
         }
-        const streak = localStorage.getItem(name + '_streak') || 0;
-        const xp = localStorage.getItem(name + '_xp') || 0;
-        document.getElementById('localStreak').innerText = streak;
-        document.getElementById('localXP').innerText = xp;
+
+        if (!student) return;
+        
+        let lessons = parseInt(localStorage.getItem('lessons_' + student)) || 0;
+        let points = parseInt(localStorage.getItem('points_' + student)) || 0;
+        
+        const counterInfo = document.getElementById('counterInfo');
+        counterInfo.style.display = 'block';
+        counterInfo.innerHTML = `<i class="fa-solid fa-list-check"></i> الحصص المحسوبة: <b>${lessons}/8</b> حصص | <i class="fa-solid fa-trophy"></i> نقاط التميز: <span class="points-badge">${points} نقطة</span>`;
     }
 
-    function updateHeroStats(name) {
-        let streak = parseInt(localStorage.getItem(name + '_streak') || 0);
-        let xp = parseInt(localStorage.getItem(name + '_xp') || 0);
-        const lastCheck = localStorage.getItem(name + '_last_check');
-        const todayStr = new Date().toDateString();
-
-        if (lastCheck !== todayStr) {
-            streak = streak + 1; 
-            xp = xp + 100;       
-            localStorage.setItem(name + '_streak', streak);
-            localStorage.setItem(name + '_xp', xp);
-            localStorage.setItem(name + '_last_check', todayStr);
+    // 1. معالجة وحفظ تقرير رصد الحلقة
+    document.getElementById('tartilaForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const msg = document.getElementById('msg');
+        const select = document.getElementById('studentSelect');
+        let student = select.value;
+        
+        // إذا كان طالباً جديداً يدوياً، نأخذ الاسم من الحقل المخصص
+        if (student === "طالب جديد") {
+            student = document.getElementById('customStudentName').value.trim();
         }
-        loadHeroStats();
-    }
 
-    function getBadge(index) {
-        if (index === 0) return "بطل ماسي 💎";
-        if (index === 1) return "حافظ محترف 👑";
-        if (index === 2) return "مُرتل سريع ⚡";
-        return "بطل ملتزم ⭐";
-    }
+        const status = document.querySelector('input[name="st"]:checked').value;
+        
+        msg.style.display = 'block';
+        msg.innerText = "جاري الحفظ وفحص نظام التنبيهات الذكي... ⏳";
 
-    async function loadData() {
-        try {
-            const response = await fetch(scriptURL + '?nocache=' + new Date().getTime());
-            const data = await response.json();
-            document.getElementById('wirdDisplay').innerText = data.wirdText || "اكتبي الورد في الخلية A1";
+        let hifz = "-", moraajaa = "-", tajweed = "-", deficiency = "-", subscription = "-", addedPoints = 0;
+
+        if(status === "حضور") {
+            hifz = document.getElementById('hifzLevel').value || "لم يحدد";
+            moraajaa = document.getElementById('moraajaaLevel').value || "لم يحدد";
+            tajweed = document.getElementById('tajweedQuality').value || "لم يحدد";
+            deficiency = document.getElementById('deficiencyNotes').value || "لا يوجد قصور";
+            subscription = document.getElementById('subscriptionSelect').value;
+            addedPoints = parseInt(document.getElementById('pointsSelect').value) || 0;
+
+            let currentLessons = parseInt(localStorage.getItem('lessons_' + student)) || 0;
+            let currentPoints = parseInt(localStorage.getItem('points_' + student)) || 0;
             
-            const listDiv = document.getElementById('list');
-            if (!data.leaderboard || data.leaderboard.length === 0) {
-                listDiv.innerHTML = "كن أول بطل اليوم! ✨";
-            } else {
-                let validCount = 0;
-                listDiv.innerHTML = data.leaderboard.map((name) => {
-                    if (!name) return '';
-                    let nameStr = String(name).trim();
-                    if (nameStr.includes('GMT') || nameStr.includes('/') || nameStr.includes(':') || nameStr === "") return '';
-                    
-                    let rank = validCount === 0 ? '🥇 الأول' : validCount === 1 ? '🥈 الثاني' : validCount === 2 ? '🥉 الثالث' : (validCount + 1) + '# ';
-                    let badge = getBadge(validCount); 
-                    validCount++;
-                    
-                    return `
-                        <div class="student-item">
-                            <span class="rank">${rank}</span>
-                            <span class="hero-name">${nameStr}</span>
-                            <span class="badge-tag">${badge}</span>
-                        </div>`;
-                }).join('');
+            currentLessons++;
+            currentPoints += addedPoints;
+            
+            localStorage.setItem('lessons_' + student, currentLessons);
+            localStorage.setItem('points_' + student, currentPoints);
+
+            // إنذار الـ 8 حصص
+            if (currentLessons >= 8) {
+                alert(`🚨 إنذار مالي للمعلمة بسنت:\n\nالطالب [ ${student} ] أتم اليوم حصته الـ 8! انتهى الشهر المالي المدفوع وجاهز للتجديد.`);
+                localStorage.setItem('lessons_' + student, 0); 
             }
-        } catch (e) { 
-            document.getElementById('wirdDisplay').innerText = "خطأ في تحميل البيانات"; 
-            document.getElementById('list').innerHTML = "تأكدي من تنظيف الصفوف الزائدة في الشيت 🌸";
+            
+            // إنذار الـ 50 نقطة
+            if (currentPoints >= 50) {
+                alert(`🏆 بطاقة تميز واحتفال للطفل:\n\nالطالب [ ${student} ] جمع 50 نقطة تميز! جاهز لاستلام شهادة الإنجاز الشهرية.`);
+            }
+        } else {
+            deficiency = "غائب عن الحلقة";
+            subscription = "غائب ❌";
         }
-    }
 
-    async function sendData() {
-        const nameInput = document.getElementById('studentName');
-        const name = nameInput.value.trim();
-        const wird = document.getElementById('wirdDisplay').innerText;
+        const payload = {
+            type: "halka_report",
+            date: document.getElementById('halkaDate').value,
+            name: student,
+            status: status,
+            hifz: hifz,
+            moraajaa: moraajaa,
+            tajweed: tajweed,
+            deficiency: deficiency,
+            subscription: subscription,
+            points: addedPoints
+        };
 
-        if (!name) return alert("اكتب اسمك يا بطل 🌸");
+        fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) })
+        .then(() => {
+            msg.innerText = "تم رصد التقرير وتوزيع البيانات في الأعمدة بنجاح كامل! 🌸✨";
+            document.getElementById('hifzLevel').value = "";
+            document.getElementById('moraajaaLevel').value = "";
+            document.getElementById('tajweedQuality').value = "";
+            document.getElementById('deficiencyNotes').value = "";
+            document.getElementById('customStudentName').value = "";
+            select.value = "";
+            document.getElementById('counterInfo').style.display = 'none';
+            document.getElementById('customStudentName').style.display = 'none';
+            setTimeout(() => msg.style.display='none', 4000);
+        });
+    });
 
-        document.getElementById('submitBtn').disabled = true;
-        confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
-        updateHeroStats(name);
+    // 2. معالجة وإضافة بيانات المواعيد والتعويضات للطلاب الجدد
+    document.getElementById('newStudentForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const msg = document.getElementById('msg');
+        msg.style.display = 'block';
+        msg.innerText = "جاري جدولة الموعد ونوع الحصة بالجدول... 💾";
 
-        const finalURL = `${scriptURL}?name=${encodeURIComponent(name)}&task=${encodeURIComponent(wird)}`;
+        const payload = {
+            type: "new_student",
+            name: document.getElementById('newStudentName').value,
+            age: document.getElementById('studentAge').value,
+            schedule: document.getElementById('studentSchedule').value,
+            phone: document.getElementById('studentPhone').value,
+            classType: document.getElementById('classType').value
+        };
 
-        try {
-            await fetch(finalURL, { method: 'GET', mode: 'no-cors' });
-            alert(`بارَك الله فيك يا بطل! تم تسجيل إنجازك وحصلت على +100 نقطة وازداد معدل التزامك 🔥!`);
-            nameInput.value = '';
-            loadHeroStats();
-            setTimeout(loadData, 2000);
-        } catch (e) {
-            alert("تم الإرسال بنجاح وتحديث لوحة الأبطال!");
-            location.reload();
-        } finally {
-            document.getElementById('submitBtn').disabled = false;
-        }
-    }
+        fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) })
+        .then(() => {
+            msg.innerText = "تم حفظ الموعد بنجاح في ورقة 'بيانات الطلاب'! 🟢";
+            
+            // إضافة الطالب الجديد يدوياً للقائمة فوراً كدعم مرن
+            const select = document.getElementById('studentSelect');
+            const opt = document.createElement('option');
+            opt.value = payload.name;
+            opt.innerHTML = payload.name;
+            select.insertBefore(opt, select.lastChild); // تضاف قبل خانة "طالب جديد"
 
-    window.onload = loadData;
+            document.getElementById('newStudentForm').reset();
+            setTimeout(() => msg.style.display='none', 4000);
+        });
+    });
 </script>
+
 </body>
 </html>
