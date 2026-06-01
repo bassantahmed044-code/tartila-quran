@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -7,61 +6,109 @@
     <title>منصة ترتيلاً لإدارة الحلقات والاشتراكات</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
         :root {
-            --pink-bg: #fff0f5; 
-            --blue-accent: #e0f7fa; 
-            --pink-main: #ff69b4;
-            --pistachio: #e8f5e9; 
+            --lavender-bg: #f9f6fa; /* خلفية لافندر ناعمة جداً ونقية */
+            --lavender-main: #926ca9; /* لون مخطوطة ترتيلا والورقة في الصورة */
+            --lavender-light: #f3edf7; /* درجة فاتحة للأزرار المشرقة */
+            --gold-accent: #d4af37; /* لمسة ذهبية ناعمة للهلال والنجوم */
             --white-card: #ffffff;
-            --text-color: #4a4a4a;
+            --text-muted: #6e6573;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: var(--pink-bg); font-family: 'Cairo', sans-serif; color: var(--text-color); padding: 30px 15px; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
-        .container { background: var(--white-card); max-width: 650px; width: 100%; border-radius: 25px; box-shadow: 0 10px 30px rgba(255, 105, 180, 0.1); padding: 30px; border: 2px solid #ffb6c1; }
+        body { background-color: var(--lavender-bg); font-family: 'Cairo', sans-serif; color: #4a4050; padding: 30px 15px; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
+        .container { background: var(--white-card); max-width: 650px; width: 100%; border-radius: 30px; box-shadow: 0 15px 35px rgba(146, 108, 169, 0.08); padding: 35px 30px; border: 1px solid #ebdff2; }
         
-        .header { text-align: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 2px dashed #ffb6c1; }
-        .platform-name { color: var(--pink-main); font-size: 34px; font-weight: 700; }
-        .teacher-name { color: #777; font-size: 16px; display: block; margin-top: 5px; font-weight: 600; }
+        /* تأثير اللوجو البرمجي المحاكي للصورة 1000500689.png.jpeg بالكامل */
+        .logo-area { display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; margin-bottom: 25px; padding-bottom: 20px; }
         
-        .tabs-menu { display: flex; gap: 10px; margin-bottom: 25px; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
-        .tab-btn { flex: 1; padding: 12px; border: none; background: #f5f5f5; border-radius: 12px; cursor: pointer; font-family: 'Cairo', sans-serif; font-weight: bold; font-size: 14px; color: #777; transition: all 0.3s; }
-        .tab-btn.active { background: var(--pink-main); color: white; box-shadow: 0 4px 10px rgba(255, 105, 180, 0.2); }
+        /* القوس العلوي الرقيق */
+        .logo-arch { border: 2px solid #e3d5eb; border-radius: 50% 50% 0 0 / 40% 40% 0 0; width: 180px; height: 160px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; padding-top: 10px; }
+        .logo-arch::before { content: ''; position: absolute; bottom: 0; width: 100%; height: 2px; background: linear-gradient(to right, transparent, #e3d5eb, transparent); }
+        
+        /* الهلال الذهبي والنجوم */
+        .crescent { color: #dfba5c; font-size: 26px; transform: rotate(-15px); text-shadow: 0 2px 5px rgba(223,186,92,0.3); margin-bottom: -5px; }
+        .stars-container { position: absolute; width: 100%; height: 100%; pointer-events: none; }
+        .star-mini { position: absolute; color: #e5c16b; font-size: 8px; }
+        .star-purple { position: absolute; color: #bca0cc; font-size: 10px; }
+        
+        /* رسمة المصحف المفتوح بالحجم الناعم */
+        .quran-box { position: relative; margin-top: 5px; filter: drop-shadow(0 4px 6px rgba(146, 108, 169, 0.15)); }
+        .quran-book { font-size: 38px; color: var(--lavender-main); background: linear-gradient(135deg, #a682bc, #815b98); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* غصن الأوراق الجانبي الملتف */
+        .branch-decor { position: absolute; left: 180px; bottom: 55px; color: #a381b8; font-size: 28px; transform: rotate(-20deg); opacity: 0.85; }
+
+        /* مخطوطة ترتيلاً البارزة الناعمة */
+        .tartila-title { font-family: 'Cairo', sans-serif; font-size: 46px; font-weight: 900; color: var(--lavender-main); margin-top: 5px; letter-spacing: -1px; text-shadow: 1px 2px 0px #fff, 2px 4px 0px rgba(146, 108, 169, 0.12); position: relative; line-height: 1.2; }
+        
+        /* السطر الفرعي الفاصل والقلب السفلي */
+        .sub-slogan { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; font-size: 14px; color: var(--lavender-main); font-weight: 600; margin-top: -2px; }
+        .sub-slogan::before, .sub-slogan::after { content: ''; flex: 1; height: 1px; background: #e0d1e8; max-width: 60px; }
+        .heart-divider { color: #9c75b2; font-size: 11px; margin-top: 5px; }
+
+        .teacher-badge { font-size: 13px; color: var(--text-muted); font-weight: 600; background: var(--lavender-bg); padding: 4px 14px; border-radius: 20px; margin-top: 10px; border: 1px solid #eedff5; }
+        
+        /* التبويبات المتناسقة والأزرار الناعمة */
+        .tabs-menu { display: flex; gap: 12px; margin: 20px 0; background: var(--lavender-bg); padding: 6px; border-radius: 16px; border: 1px solid #f0e6f5; }
+        .tab-btn { flex: 1; padding: 12px; border: none; background: transparent; border-radius: 12px; cursor: pointer; font-family: 'Cairo', sans-serif; font-weight: 700; font-size: 14px; color: var(--text-muted); transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .tab-btn.active { background: var(--white-card); color: var(--lavender-main); box-shadow: 0 4px 12px rgba(146, 108, 169, 0.08); }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--pink-main); }
-        input, select, textarea { width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 15px; background-color: #fafafa; outline: none; transition: all 0.3s; font-family: 'Cairo', sans-serif; }
-        input:focus, select:focus, textarea:focus { border-color: var(--pink-main); background-color: #fff; }
+        /* النماذج والمدخلات المريحة للعين */
+        .form-group { margin-bottom: 22px; }
+        label { display: block; margin-bottom: 8px; font-weight: 700; color: var(--lavender-main); font-size: 14px; }
+        input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e8dfed; border-radius: 14px; font-size: 15px; background-color: #fdfcfe; outline: none; transition: all 0.3s; font-family: 'Cairo', sans-serif; color: #4a4050; }
+        input:focus, select:focus, textarea:focus { border-color: var(--lavender-main); background-color: #fff; box-shadow: 0 0 0 4px rgba(146, 108, 169, 0.06); }
         
         .status-box { display: flex; gap: 15px; }
         .status-option { flex: 1; text-align: center; }
         .status-option input { display: none; }
-        .status-option label { background: #f5f5f5; padding: 12px; border-radius: 12px; cursor: pointer; border: 2px solid #e0e0e0; display: block; font-weight: 700; transition: all 0.3s; }
-        .status-option input:checked + label { background: var(--pink-main); color: white; border-color: var(--pink-main); }
+        .status-option label { background: #fdfcfe; padding: 12px; border-radius: 14px; cursor: pointer; border: 2px solid #e8dfed; display: block; font-weight: 700; transition: all 0.3s; color: var(--text-muted); }
+        .status-option input:checked + label { background: var(--lavender-main); color: white; border-color: var(--lavender-main); box-shadow: 0 4px 10px rgba(146, 108, 169, 0.15); }
         
-        .eval-card { background: #fffafb; padding: 20px; border-radius: 15px; border: 1px solid #ffb6c1; margin-top: 15px; }
-        .money-card { background: #fffde7; padding: 15px; border-radius: 12px; border: 1px solid #fff59d; margin-bottom: 15px; }
+        .eval-card { background: #fdfbfe; padding: 20px; border-radius: 18px; border: 1px solid #ebdff2; margin-top: 15px; }
+        .money-card { background: #fffdf2; padding: 18px; border-radius: 14px; border: 1px solid #f6ecce; margin-bottom: 20px; }
         
-        .submit-btn { width: 100%; background: var(--pink-main); color: white; border: none; padding: 14px; font-size: 18px; font-weight: bold; border-radius: 12px; cursor: pointer; margin-top: 10px; transition: all 0.3s; box-shadow: 0 4px 12px rgba(255, 105, 180, 0.2); }
-        .submit-btn:hover { background: #ff4500; }
+        .submit-btn { width: 100%; background: var(--lavender-main); color: white; border: none; padding: 14px; font-size: 16px; font-weight: 700; border-radius: 14px; cursor: pointer; margin-top: 10px; transition: all 0.3s; box-shadow: 0 5px 15px rgba(146, 108, 169, 0.2); font-family: 'Cairo', sans-serif; }
+        .submit-btn:hover { background: #7c5893; transform: translateY(-1px); }
         
-        .alert { display: none; padding: 15px; border-radius: 12px; text-align: center; margin-top: 20px; font-weight: bold; background: var(--pistachio); color: #2e7d32; border: 1px solid #c8e6c9; }
-        .counter-info { background: var(--blue-accent); padding: 10px; border-radius: 10px; text-align: center; font-size: 14px; margin-top: 8px; color: #006064; font-weight: 600; display: none; }
+        .alert { display: none; padding: 15px; border-radius: 14px; text-align: center; margin-top: 20px; font-weight: 700; background: #edf7ed; color: #2e7d32; border: 1px solid #c8e6c9; font-size: 14px; }
+        .counter-info { background: #edf4f7; padding: 11px; border-radius: 12px; text-align: center; font-size: 13px; margin-top: 10px; color: #2a5c66; font-weight: 700; display: none; border: 1px solid #d4e5eb; }
         .points-badge { background: #fff3e0; color: #e65100; padding: 2px 8px; border-radius: 6px; font-size: 12px; font-weight: bold; margin-right: 5px; display: inline-block; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="header">
-        <h1 class="platform-name">منصة ترتيلاً الإلكترونية</h1>
-        <span class="teacher-name">تحت إشراف المعلمة بسنت أحمد</span>
+    
+    <!-- محاكاة دقيقة جداً للهوية واللوجو الموجود بالصورة 1000500689.png.jpeg -->
+    <div class="logo-area">
+        <div class="logo-arch">
+            <div class="stars-container">
+                <i class="fa-solid fa-star star-mini" style="top: 20px; right: 40px; color:#dfba5c;"></i>
+                <i class="fa-solid fa-sparkles star-purple" style="top: 45px; left: 35px;"></i>
+                <i class="fa-solid fa-star star-mini" style="bottom: 60px; right: 25px;"></i>
+                <i class="fa-solid fa-sparkles star-purple" style="top: 15px; left: 65px; color:#dfba5c;"></i>
+            </div>
+            <div class="crescent"><i class="fa-solid fa-moon"></i></div>
+            <div class="quran-box">
+                <i class="fa-solid fa-book-open quran-book"></i>
+            </div>
+        </div>
+        <!-- غصن لافندر الملتف جهة اليمين كالصورة -->
+        <div class="branch-decor"><i class="fa-solid fa-leaf"></i></div>
+        
+        <h1 class="tartila-title">ترتيلا</h1>
+        <div class="sub-slogan">لحفظ القرآن أون لاين</div>
+        <div class="heart-divider"><i class="fa-solid fa-heart"></i></div>
+        
+        <span class="teacher-badge">تحت إشراف المعلمة بسنت أحمد</span>
     </div>
 
     <div class="tabs-menu">
@@ -107,12 +154,12 @@
                     <option value="طالب جديد">➕ [إضافة طالب جديد يدوياً]</option>
                 </select>
                 
-                <input type="text" id="customStudentName" placeholder="اكتبي اسم الطالب الجديد هنا..." style="display:none; margin-top:10px; border-color:#ff69b4;">
+                <input type="text" id="customStudentName" placeholder="اكتبي اسم الطالب الجديد هنا..." style="display:none; margin-top:10px; border-color:var(--lavender-main);">
                 <div id="counterInfo" class="counter-info"></div>
             </div>
 
             <div class="form-group">
-                <label><i class="fa-solid fa-circle-info"></i> الحالة:</label>
+                <label><i class="fa-solid fa-circle-info"></i> الحالة للحصة الحالية:</label>
                 <div class="status-box">
                     <div class="status-option">
                         <input type="radio" name="st" id="p" value="حضور" checked onclick="showEval(true)">
@@ -127,11 +174,11 @@
 
             <div id="evalArea" class="eval-card">
                 
-                <!-- قسم الحسابات والاشتراكات المطور -->
+                <!-- قسم الحسابات والاشتراكات المطور المربوط بالـ M3 و عمود J -->
                 <div class="money-card">
-                    <h4 style="color: #e65100; margin-bottom: 10px;"><i class="fa-solid fa-wallet"></i> الحصر المالي للاشتراك:</h4>
+                    <h4 style="color: #a47632; margin-bottom: 12px; font-size: 14px;"><i class="fa-solid fa-wallet"></i> الحصر والتحصيل المالي للاشتراك الحالي:</h4>
                     <div class="form-group">
-                        <label style="color: #555; font-size: 14px;">حالة الاشتراك:</label>
+                        <label style="color: #6e6573; font-size: 13px;">حالة الاشتراك الحالية:</label>
                         <select id="subscriptionSelect" onchange="toggleMoneyFields()">
                             <option value="مدفوع 🟢" selected>مدفوع 🟢</option>
                             <option value="غير مدفوع 🔴">غير مدفوع 🔴</option>
@@ -140,11 +187,11 @@
                     
                     <div id="moneyFields" style="display: flex; gap: 10px;">
                         <div class="form-group" style="flex: 1; margin-bottom: 0;">
-                            <label style="color: #555; font-size: 14px;">كم دفع الطالب؟ (المبلغ):</label>
+                            <label style="color: #6e6573; font-size: 13px;">المبلغ المدفوع (جنيه):</label>
                             <input type="number" id="amountPaid" placeholder="مثال: 200" value="0">
                         </div>
                         <div class="form-group" style="flex: 1; margin-bottom: 0;">
-                            <label style="color: #555; font-size: 14px;">يوم كام؟ (تاريخ الدفع):</label>
+                            <label style="color: #6e6573; font-size: 13px;">تاريخ سداد المبلغ:</label>
                             <input type="date" id="paymentDate">
                         </div>
                     </div>
@@ -154,50 +201,50 @@
                     <label><i class="fa-solid fa-medal"></i> منح نقاط تميز إضافية لحلقة اليوم:</label>
                     <select id="pointsSelect">
                         <option value="0">بدون نقاط إضافية</option>
-                        <option value="5">5 نقاط (حفظ ممتاز) ⭐</option>
-                        <option value="10">10 نقاط (أداء استثنائي وتجويد متقن) 🏆</option>
+                        <option value="5">5 نقاط (حفظ ممتاز ومتقن) ⭐</option>
+                        <option value="10">10 نقاط (أداء استثنائي وتجويد رائع) 🏆</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label>📖 مستوى الحفظ اليومي:</label>
-                    <input type="text" id="hifzLevel" placeholder="اكتبي السورة والآيات...">
+                    <label>📖 محتوى ومستوى الحفظ اليومي:</label>
+                    <input type="text" id="hifzLevel" placeholder="اكتبي السورة والآيات الحالية...">
                 </div>
 
                 <div class="form-group">
-                    <label>🔄 مستوى المراجعة الحالية:</label>
-                    <input type="text" id="moraajaaLevel" placeholder="اكتبي السورة أو الأجزاء...">
+                    <label>🔄 مستوى المراجعة التراكمية:</label>
+                    <input type="text" id="moraajaaLevel" placeholder="اكتبي السور التي تمت مراجعتها...">
                 </div>
 
                 <div class="form-group">
-                    <label>✨ جودة التجويد والأداء:</label>
-                    <input type="text" id="tajweedQuality" placeholder="مثال: تجويد سليم وممتاز">
+                    <label>✨ جودة التجويد والأداء الصوتي:</label>
+                    <input type="text" id="tajweedQuality" placeholder="مثال: أحكام النون الساكنة ممتازة">
                 </div>
 
                 <div class="form-group" style="margin-bottom: 0;">
-                    <label>🔍 بيان القصور أو ملاحظات التوجيه الكلي لولي الأمر:</label>
-                    <textarea id="deficiencyNotes" rows="2" placeholder="اكتبي القصور أو التوجيه هنا..."></textarea>
+                    <label>🔍 ملاحظات وتوجيهات شاملة لولي الأمر:</label>
+                    <textarea id="deficiencyNotes" rows="2" placeholder="اكتبي التوجيه أو القصور الكلي هنا..."></textarea>
                 </div>
             </div>
 
-            <button type="submit" class="submit-btn">حفظ وإرسال التقرير والحسابات</button>
+            <button type="submit" class="submit-btn">حفظ وإرسال التقرير والحسابات للمجموعة</button>
         </form>
     </div>
 
-    <!-- التبويب الثاني: إدخال بيانات المواعيد -->
+    <!-- التبويب الثاني: إدخال بيانات المواعيد والطلاب الجدد -->
     <div id="students-tab" class="tab-content">
         <form id="newStudentForm">
             <div class="form-group">
                 <label><i class="fa-solid fa-id-card"></i> اسم الطفل بالكامل:</label>
-                <input type="text" id="newStudentName" placeholder="مثال: إبراهيم محمد" required>
+                <input type="text" id="newStudentName" placeholder="مثال: أحمد محمد" required>
             </div>
             <div class="form-group">
-                <label><i class="fa-solid fa-child"></i> عمر الطفل:</label>
-                <input type="number" id="studentAge" placeholder="مثال: 7 سنوات" required>
+                <label><i class="fa-solid fa-child"></i> عمر الطفل السني:</label>
+                <input type="number" id="studentAge" placeholder="مثال: 8 سنوات" required>
             </div>
             <div class="form-group">
-                <label><i class="fa-solid fa-clock"></i> الموعد الأسبوعي المحدد له:</label>
-                <input type="text" id="studentSchedule" placeholder="مثال: السبت الساعة 4 عصراً" required>
+                <label><i class="fa-solid fa-clock"></i> الموعد الأسبوعي المتفق عليه:</label>
+                <input type="text" id="studentSchedule" placeholder="مثال: الأحد الساعة 5 مساءً" required>
             </div>
             <div class="form-group">
                 <label><i class="fa-solid fa-phone"></i> رقم تواصل ولي الأمر (واتساب):</label>
@@ -210,7 +257,7 @@
                     <option value="تعويضية عن غياب سابق">حصة تعويضية إضافية (بدل غياب سابق)</option>
                 </select>
             </div>
-            <button type="submit" class="submit-btn" style="background-color: #20b2aa;">حفظ وإضافة الطالب والموعد للجدول</button>
+            <button type="submit" class="submit-btn" style="background-color: #7290a6;">حفظ وإضافة الطالب والجدول فوراً</button>
         </form>
     </div>
 
@@ -218,7 +265,6 @@
 </div>
 
 <script>
-    // الرابط المباشر والأحدث المربوط بالـ Script الحالي الخاص بكِ
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwMxNUqNvq7heRSi3FSOP_nnTvezB_QzurGK04KNHz96EqxoKl3wS4qJMZmkM5wnfqv/exec";
 
     const today = new Date().toISOString().split('T')[0];
@@ -272,6 +318,7 @@
         counterInfo.innerHTML = `<i class="fa-solid fa-list-check"></i> الحصص المحسوبة: <b>${lessons}/8</b> حصص | <i class="fa-solid fa-trophy"></i> نقاط التميز: <span class="points-badge">${points} نقطة</span>`;
     }
 
+    // 1. إرسال تقرير رصد الحلقة والبيانات المالية
     document.getElementById('tartilaForm').addEventListener('submit', function(e) {
         e.preventDefault();
         const msg = document.getElementById('msg');
@@ -342,7 +389,7 @@
 
         fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) })
         .then(() => {
-            msg.innerText = "تم حفظ حصر الدفع والتقرير في خلايا شيت وجدول الحلقات بنجاح! 🌸✨";
+            msg.innerText = "تم حفظ حصر الدفع والتقرير وتحديث خانة الإجمالي بنجاح! 🟣✨";
             document.getElementById('hifzLevel').value = "";
             document.getElementById('moraajaaLevel').value = "";
             document.getElementById('tajweedQuality').value = "";
@@ -356,11 +403,12 @@
         });
     });
 
+    // 2. إضافة بيانات المواعيد للطلاب الجدد
     document.getElementById('newStudentForm').addEventListener('submit', function(e) {
         e.preventDefault();
         const msg = document.getElementById('msg');
         msg.style.display = 'block';
-        msg.innerText = "جاري جدولة الموعد ونوع الحصة بالجدول... 💾";
+        msg.innerText = "جاري جدولة الموعد الجديد بالجدول... 💾";
 
         const payload = {
             type: "new_student",
@@ -373,7 +421,7 @@
 
         fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) })
         .then(() => {
-            msg.innerText = "تم حفظ الموعد بنجاح في ورقة 'بيانات الطلاب'! 🟢";
+            msg.innerText = "تم حفظ الموعد بنجاح في الشيت المساعد! 🟣";
             
             const select = document.getElementById('studentSelect');
             const opt = document.createElement('option');
