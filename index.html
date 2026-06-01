@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -11,10 +12,10 @@
     
     <style>
         :root {
-            --pink-bg: #fff0f5; /* روز ناعم */
-            --blue-accent: #e0f7fa; /* بيبي بلو للعدادات */
+            --pink-bg: #fff0f5; 
+            --blue-accent: #e0f7fa; 
             --pink-main: #ff69b4;
-            --pistachio: #e8f5e9; /* فستقي مريح للرسائل */
+            --pistachio: #e8f5e9; 
             --white-card: #ffffff;
             --text-color: #4a4a4a;
         }
@@ -45,6 +46,8 @@
         .status-option input:checked + label { background: var(--pink-main); color: white; border-color: var(--pink-main); }
         
         .eval-card { background: #fffafb; padding: 20px; border-radius: 15px; border: 1px solid #ffb6c1; margin-top: 15px; }
+        .money-card { background: #fffde7; padding: 15px; border-radius: 12px; border: 1px solid #fff59d; margin-bottom: 15px; }
+        
         .submit-btn { width: 100%; background: var(--pink-main); color: white; border: none; padding: 14px; font-size: 18px; font-weight: bold; border-radius: 12px; cursor: pointer; margin-top: 10px; transition: all 0.3s; box-shadow: 0 4px 12px rgba(255, 105, 180, 0.2); }
         .submit-btn:hover { background: #ff4500; }
         
@@ -66,10 +69,11 @@
         <button class="tab-btn" onclick="switchTab('students-tab')"><i class="fa-solid fa-user-plus"></i> الطلاب والمواعيد</button>
     </div>
 
+    <!-- التبويب الأول: رصد الحلقة والمتابعة المالية والاشتراكات -->
     <div id="halka-tab" class="tab-content active">
         <form id="tartilaForm">
             <div class="form-group">
-                <label><i class="fa-regular fa-calendar-days"></i> التاريخ:</label>
+                <label><i class="fa-regular fa-calendar-days"></i> التاريخ اليومي الحالي:</label>
                 <input type="date" id="halkaDate" required>
             </div>
 
@@ -104,7 +108,6 @@
                 </select>
                 
                 <input type="text" id="customStudentName" placeholder="اكتبي اسم الطالب الجديد هنا..." style="display:none; margin-top:10px; border-color:#ff69b4;">
-                
                 <div id="counterInfo" class="counter-info"></div>
             </div>
 
@@ -123,12 +126,28 @@
             </div>
 
             <div id="evalArea" class="eval-card">
-                <div class="form-group">
-                    <label><i class="fa-solid fa-credit-card"></i> حالة الاشتراك الشهري الحالي:</label>
-                    <select id="subscriptionSelect">
-                        <option value="مدفوع 🟢" selected>مدفوع 🟢</option>
-                        <option value="غير مدفوع 🔴">غير مدفوع 🔴</option>
-                    </select>
+                
+                <!-- قسم الحسابات والاشتراكات المطور -->
+                <div class="money-card">
+                    <h4 style="color: #e65100; margin-bottom: 10px;"><i class="fa-solid fa-wallet"></i> الحصر المالي للاشتراك:</h4>
+                    <div class="form-group">
+                        <label style="color: #555; font-size: 14px;">حالة الاشتراك:</label>
+                        <select id="subscriptionSelect" onchange="toggleMoneyFields()">
+                            <option value="مدفوع 🟢" selected>مدفوع 🟢</option>
+                            <option value="غير مدفوع 🔴">غير مدفوع 🔴</option>
+                        </select>
+                    </div>
+                    
+                    <div id="moneyFields" style="display: flex; gap: 10px;">
+                        <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                            <label style="color: #555; font-size: 14px;">كم دفع الطالب؟ (المبلغ):</label>
+                            <input type="number" id="amountPaid" placeholder="مثال: 200" value="0">
+                        </div>
+                        <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                            <label style="color: #555; font-size: 14px;">يوم كام؟ (تاريخ الدفع):</label>
+                            <input type="date" id="paymentDate">
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -161,10 +180,11 @@
                 </div>
             </div>
 
-            <button type="submit" class="submit-btn">حفظ وإرسال التقرير الشامل</button>
+            <button type="submit" class="submit-btn">حفظ وإرسال التقرير والحسابات</button>
         </form>
     </div>
 
+    <!-- التبويب الثاني: إدخال بيانات المواعيد -->
     <div id="students-tab" class="tab-content">
         <form id="newStudentForm">
             <div class="form-group">
@@ -198,10 +218,12 @@
 </div>
 
 <script>
-    // ضعي رابط الـ Deployment السحري النشط الخاص بكِ هنا
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzIlnXQc8v7b-YOUR-SCRIPT-ID/exec";
+    // الرابط المباشر والأحدث المربوط بالـ Script الحالي الخاص بكِ
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwMxNUqNvq7heRSi3FSOP_nnTvezB_QzurGK04KNHz96EqxoKl3wS4qJMZmkM5wnfqv/exec";
 
-    document.getElementById('halkaDate').valueAsDate = new Date();
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('halkaDate').value = today;
+    document.getElementById('paymentDate').value = today;
 
     function switchTab(tabId) {
         document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -214,7 +236,17 @@
         document.getElementById('evalArea').style.display = v ? 'block' : 'none'; 
     }
 
-    // إظهار حقل كتابة الاسم المخصص إذا تم اختيار "طالب جديد"
+    function toggleMoneyFields() {
+        const sub = document.getElementById('subscriptionSelect').value;
+        const moneyFields = document.getElementById('moneyFields');
+        if (sub === "غير مدفوع 🔴") {
+            moneyFields.style.display = 'none';
+            document.getElementById('amountPaid').value = "0";
+        } else {
+            moneyFields.style.display = 'flex';
+        }
+    }
+
     function updateStudentStats() {
         const select = document.getElementById('studentSelect');
         const customInput = document.getElementById('customStudentName');
@@ -240,14 +272,12 @@
         counterInfo.innerHTML = `<i class="fa-solid fa-list-check"></i> الحصص المحسوبة: <b>${lessons}/8</b> حصص | <i class="fa-solid fa-trophy"></i> نقاط التميز: <span class="points-badge">${points} نقطة</span>`;
     }
 
-    // 1. معالجة وحفظ تقرير رصد الحلقة
     document.getElementById('tartilaForm').addEventListener('submit', function(e) {
         e.preventDefault();
         const msg = document.getElementById('msg');
         const select = document.getElementById('studentSelect');
         let student = select.value;
         
-        // إذا كان طالباً جديداً يدوياً، نأخذ الاسم من الحقل المخصص
         if (student === "طالب جديد") {
             student = document.getElementById('customStudentName').value.trim();
         }
@@ -255,9 +285,10 @@
         const status = document.querySelector('input[name="st"]:checked').value;
         
         msg.style.display = 'block';
-        msg.innerText = "جاري الحفظ وفحص نظام التنبيهات الذكي... ⏳";
+        msg.innerText = "جاري حفظ التقرير والبيانات المالية الحالية... ⏳";
 
         let hifz = "-", moraajaa = "-", tajweed = "-", deficiency = "-", subscription = "-", addedPoints = 0;
+        let amountPaid = 0, paymentDate = "-";
 
         if(status === "حضور") {
             hifz = document.getElementById('hifzLevel').value || "لم يحدد";
@@ -266,6 +297,11 @@
             deficiency = document.getElementById('deficiencyNotes').value || "لا يوجد قصور";
             subscription = document.getElementById('subscriptionSelect').value;
             addedPoints = parseInt(document.getElementById('pointsSelect').value) || 0;
+            
+            if (subscription === "مدفوع 🟢") {
+                amountPaid = document.getElementById('amountPaid').value || 0;
+                paymentDate = document.getElementById('paymentDate').value || today;
+            }
 
             let currentLessons = parseInt(localStorage.getItem('lessons_' + student)) || 0;
             let currentPoints = parseInt(localStorage.getItem('points_' + student)) || 0;
@@ -276,15 +312,13 @@
             localStorage.setItem('lessons_' + student, currentLessons);
             localStorage.setItem('points_' + student, currentPoints);
 
-            // إنذار الـ 8 حصص
             if (currentLessons >= 8) {
-                alert(`🚨 إنذار مالي للمعلمة بسنت:\n\nالطالب [ ${student} ] أتم اليوم حصته الـ 8! انتهى الشهر المالي المدفوع وجاهز للتجديد.`);
+                alert(`🚨 إنذار مالي للمعلمة بسنت:\n\nالطالب [ ${student} ] أتم اليوم حصته الـ 8! انتهى الشهر المالي وجاهز للتجديد.`);
                 localStorage.setItem('lessons_' + student, 0); 
             }
             
-            // إنذار الـ 50 نقطة
             if (currentPoints >= 50) {
-                alert(`🏆 بطاقة تميز واحتفال للطفل:\n\nالطالب [ ${student} ] جمع 50 نقطة تميز! جاهز لاستلام شهادة الإنجاز الشهرية.`);
+                alert(`🏆 بطاقة تميز واحتفال للطفل:\n\nالطالب [ ${student} ] جمع 50 نقطة تميز! جاهز لاستلام شهادة الإنجاز الشهري.`);
             }
         } else {
             deficiency = "غائب عن الحلقة";
@@ -301,17 +335,20 @@
             tajweed: tajweed,
             deficiency: deficiency,
             subscription: subscription,
-            points: addedPoints
+            points: addedPoints,
+            amountPaid: amountPaid,    
+            paymentDate: paymentDate   
         };
 
         fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) })
         .then(() => {
-            msg.innerText = "تم رصد التقرير وتوزيع البيانات في الأعمدة بنجاح كامل! 🌸✨";
+            msg.innerText = "تم حفظ حصر الدفع والتقرير في خلايا شيت وجدول الحلقات بنجاح! 🌸✨";
             document.getElementById('hifzLevel').value = "";
             document.getElementById('moraajaaLevel').value = "";
             document.getElementById('tajweedQuality').value = "";
             document.getElementById('deficiencyNotes').value = "";
             document.getElementById('customStudentName').value = "";
+            document.getElementById('amountPaid').value = "0";
             select.value = "";
             document.getElementById('counterInfo').style.display = 'none';
             document.getElementById('customStudentName').style.display = 'none';
@@ -319,7 +356,6 @@
         });
     });
 
-    // 2. معالجة وإضافة بيانات المواعيد والتعويضات للطلاب الجدد
     document.getElementById('newStudentForm').addEventListener('submit', function(e) {
         e.preventDefault();
         const msg = document.getElementById('msg');
@@ -339,12 +375,11 @@
         .then(() => {
             msg.innerText = "تم حفظ الموعد بنجاح في ورقة 'بيانات الطلاب'! 🟢";
             
-            // إضافة الطالب الجديد يدوياً للقائمة فوراً كدعم مرن
             const select = document.getElementById('studentSelect');
             const opt = document.createElement('option');
             opt.value = payload.name;
             opt.innerHTML = payload.name;
-            select.insertBefore(opt, select.lastChild); // تضاف قبل خانة "طالب جديد"
+            select.insertBefore(opt, select.lastChild);
 
             document.getElementById('newStudentForm').reset();
             setTimeout(() => msg.style.display='none', 4000);
